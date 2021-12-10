@@ -28,6 +28,7 @@ public class bl_Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private Canvas m_Canvas;
     private float diff;
     private Vector3 PressScaleVector;
+    private Vector3 touchPosition = new Vector3();
 
     /// <summary>
     /// 
@@ -124,16 +125,21 @@ public class bl_Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             isFree = false;
             //Get Position of current touch
-            Vector3 position = bl_JoystickUtils.TouchPosition(m_Canvas,GetTouchID);
+            //Vector3 position;
+
+            if (Input.touchCount == 1)
+            {
+                touchPosition = bl_JoystickUtils.TouchPosition(m_Canvas,GetTouchID);
+            }
 
             //Rotate into the area circumferential of joystick
-            if (Vector2.Distance(DeathArea, position) < radio)
+            if (Vector2.Distance(DeathArea, touchPosition) < radio)
             {
-                StickRect.position = position;
+                StickRect.position = touchPosition;
             }
             else
             {
-                StickRect.position = DeathArea + (position - DeathArea).normalized * radio;
+                StickRect.position = DeathArea + (touchPosition - DeathArea).normalized * radio;
             }
         }
     }
