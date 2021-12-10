@@ -6,6 +6,7 @@ public class ExplosionController : MonoBehaviour
 {
     [SerializeField] private float explodePower = 10f;
     [SerializeField] private float stunDuration = 3f;
+    [SerializeField] private int scoreAmount = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +29,10 @@ public class ExplosionController : MonoBehaviour
 
         if (collider.gameObject.CompareTag("Enemy"))
         {
-            ScoreSystem.AddScore(100);
+            ScoreSystem.AddScore(scoreAmount);
+
             collider.GetComponent<EnemyController>().DoDirtyStun(stunDuration);
+            collider.GetComponent<ShowScoreScript>().ShowScore(scoreAmount);
         }
     }
 }

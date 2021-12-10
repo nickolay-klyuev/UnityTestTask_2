@@ -127,7 +127,7 @@ public class bl_Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             //Get Position of current touch
             //Vector3 position;
 
-            if (Input.touchCount == 1)
+            if (Input.touchCount <= 1)
             {
                 touchPosition = bl_JoystickUtils.TouchPosition(m_Canvas,GetTouchID);
             }

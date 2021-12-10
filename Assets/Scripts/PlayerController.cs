@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float playerSpeed = 10f;
     [SerializeField] private bl_Joystick joystick;
+    [SerializeField] private int dyingScore = -1000;
 
     private float offset = 0.12f;
     private Vector3 innerPosition;
@@ -18,7 +19,8 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         transform.position = innerPosition;
-        ScoreSystem.AddScore(-1000);
+        GetComponent<ShowScoreScript>().ShowScore(dyingScore);
+        ScoreSystem.AddScore(dyingScore);
     }
 
     public void SpawnBomb()
